@@ -32,11 +32,17 @@ const setCategoryFilter = (item ) => {
         payload: item,
     }
 }
-
+const toggleModal = (item) =>{
+    return {
+        type: constants.TOGGLE_MODAL,
+        payload: item,
+    }
+}
 export default {
     setSelectedProduct,
     setCurrency,
     addToCart,
     removeFromCart,
-    setCategoryFilter
+    setCategoryFilter,
+    toggleModal,
 }

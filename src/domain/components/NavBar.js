@@ -57,6 +57,7 @@ class NavBar extends Component {
   }
   toggleMiniCart() {
     this.setState({ openMiniCart: !this.state.openMiniCart });
+    this.props.toggleModal(!this.state.openMiniCart);
   }
 
   render() {
@@ -134,6 +135,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setCurrency: (item) => dispatch(actions.setCurrency(item)),
     setCategoryFilter: (item) => dispatch(actions.setCategoryFilter(item)),
+    toggleModal: (item) => dispatch(actions.toggleModal(item)),
   };
 };
 export default connect(

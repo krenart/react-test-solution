@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import  { getCurrencySymbol } from "./NavBar";
+import { getCurrencySymbol } from "./NavBar";
 import Layout from "./Layout";
 import styles from "./pdp.module.css";
 import Container from "./Container";
@@ -47,9 +47,7 @@ class PDP extends Component {
                 <div className={styles.detailsBox}>
                   {/* <div style={{display:"inline-block", marginLeft:"800px"}}> */}
                   <p className={styles.title1}>{this.props.product.name}</p>
-                  <p className={styles.title2}>
-                    {this.props.product.name}
-                  </p>
+                  <p className={styles.title2}>{this.props.product.name}</p>
                   {this.props.product.attributes.map((item, index) => {
                     return (
                       <>
@@ -67,11 +65,11 @@ class PDP extends Component {
                                   item.type === "swatch" &&
                                   this.state.selectedAttribute[
                                     `${index}${i}`
-                                  ] === true
+                                  ] 
                                     ? styles.sizeBoxActiveSwatch
                                     : this.state.selectedAttribute[
                                         `${index}${i}`
-                                      ] === true
+                                      ] 
                                     ? styles.sizeBoxActive
                                     : styles.sizeBox
                                 }
@@ -84,7 +82,7 @@ class PDP extends Component {
                                       arr[item] = false;
                                   });
 
-                                  arr[`${index}${i}`] = true;
+                                  arr[`${index}${i}`] = itm;
                                   console.log("after filter", arr);
                                   this.setState({ selectedAttribute: arr });
                                 }}
@@ -94,7 +92,7 @@ class PDP extends Component {
                                     className={
                                       this.state.selectedAttribute[
                                         `${index}${i}`
-                                      ] === true
+                                      ] 
                                         ? styles.sizeBoxTextActive
                                         : styles.sizeBoxText
                                     }
@@ -112,27 +110,40 @@ class PDP extends Component {
 
                   <p className={styles.priceText}>Price:</p>
                   <p className={styles.priceNumber}>
-                    {getCurrencySymbol(this.props.currency) + " "+ this.props.product.prices[handleCurrencyIndex(this.props.currency)].amount}
+                    {getCurrencySymbol(this.props.currency) +
+                      " " +
+                      this.props.product.prices[
+                        handleCurrencyIndex(this.props.currency)
+                      ].amount}
                   </p>
-                  <button 
-                    onClick={()=>{
-                      this.props.addToCart({
-                        product: this.props.product,
-                        amount:1
-                      })
-                    }}className={styles.button}>
+                  <button
+                    onClick={() => {
+                      if (
+                        Object.keys(this.state.selectedAttribute).length === 0
+                      )
+                        alert("you should select at leas one attribute");
+                      else
+                        this.props.addToCart({
+                          product: this.props.product,
+                          amount: 1,
+                        });
+                    }}
+                    className={styles.button}
+                  >
                     <span className={styles.buttonText}>Add to Cart</span>
                   </button>
 
-                  <p dangerouslySetInnerHTML={{ __html: this.props.product.description }} 
-                      className={styles.descriptionText}>
-                    
-                  </p>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: this.props.product.description,
+                    }}
+                    className={styles.descriptionText}
+                  ></p>
                 </div>
               </div>
             </div>
           )}
-       </Layout>
+        </Layout>
       </>
     );
   }
@@ -142,9 +153,9 @@ const mapStateToProps = (state) => ({
   product: state.general.selectedProduct,
   currency: state.general.selectedCurrency,
 });
-const mapDispatchToProps = (dispatch) =>{
+const mapDispatchToProps = (dispatch) => {
   return {
-    addToCart: (item)=> dispatch(actions.addToCart(item)),
-  }
-}
+    addToCart: (item) => dispatch(actions.addToCart(item)),
+  };
+};
 export default connect(mapStateToProps, mapDispatchToProps)(PDP);

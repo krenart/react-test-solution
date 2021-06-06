@@ -4,8 +4,7 @@
 .smallBox img {
   width: 87px;
   height: 87px;
-  object-fit: fill;
-  background-color: gray;
+  object-fit: contain;
   margin-bottom: 40px;
   cursor: pointer;
 }

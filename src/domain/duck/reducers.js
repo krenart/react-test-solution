@@ -7,6 +7,7 @@ const defaultState = {
   cartSize: 0,
   categoryFilter: undefined,
   total: [0, 0, 0, 0, 0],
+  modal: false,
 };
 
 export default function reducer(currentState = defaultState, action) {
@@ -54,7 +55,7 @@ export default function reducer(currentState = defaultState, action) {
     case constants.REMOVE_FROM_CART:
       let tmpTotal = currentState.total;
       currentState.total.map((item, index) => {
-        tmpTotal[index] = item- action.payload.product.prices[index].amount;
+        tmpTotal[index] = item - action.payload.product.prices[index].amount;
       });
       return action.payload.amount > 1
         ? {
@@ -84,6 +85,11 @@ export default function reducer(currentState = defaultState, action) {
         categoryFilter: action.payload,
       };
 
+    case constants.TOGGLE_MODAL:
+      return {
+        ...currentState,
+        modal: action.payload,
+      };
     default:
       return currentState;
   }
