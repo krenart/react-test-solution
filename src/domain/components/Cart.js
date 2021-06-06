@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Container from "./Container";
-import NavBar from "./NavBar";
 import Card from "./Card";
 import PDP from "./PDP";
 import styles from "./cart.module.css";
@@ -9,6 +7,9 @@ import actions from "../duck/actions";
 import { getCurrencySymbol } from "./NavBar";
 import { handleCurrencyIndex } from "./Card";
 import Layout from "./Layout";
+import { withRouter } from "react-router-dom";
+import Carousel from "./Carousel";
+
 class Cart extends Component {
   constructor(props) {
     super(props);
@@ -58,139 +59,166 @@ class Cart extends Component {
                 textTransform: "lowercase",
               }}
             >
-               {this.props.cartSize} item(s)
+              {this.props.cartSize} item(s)
             </span>
-          ) : ""
-            }
+          ) : (
+            ""
+          )}
         </p>
         {this.props.cart.length === 0 && <h2>No items in cart</h2>}
-        {this.props.cart.map((item, index) => {
-          return (
-            <div
-              style={
-                this.props.mini
-                  ? { width: "325px", marginBottom: "25px" }
-                  : { width: "1097px", marginBottom: "30px" }
-              }
-            >
-              {console.log("sizePerItem", this.state.arraySizePerItem)}
-              <p
-                className={
-                  this.props.mini
-                    ? styles.horizontalLineMini
-                    : styles.horizontalLine
-                }
-              />
-              <p
-                className={this.props.mini ? styles.title1Mini : styles.title1}
-              >
-                {item.product.name}
-              </p>
-              <p
-                className={this.props.mini ? styles.title2Mini : styles.title2}
-              >
-                {item.product.name}
-              </p>
-              <p className={this.props.mini ? styles.priceMini : styles.price}>
-                {getCurrencySymbol(this.props.selectedCurrency)}{" "}
-                {
-                  item.product.prices[
-                    handleCurrencyIndex(this.props.selectedCurrency)
-                  ].amount
-                }
-              </p>
+        {this.props.cart.length > 0 &&
+          this.props.cart.map((item, index) => {
+            return (
               <div
-                className={this.props.mini ? styles.boxesMini : styles.boxes}
+                style={
+                  this.props.mini
+                    ? { width: "325px", marginBottom: "25px" }
+                    : { width: "1097px", marginBottom: "30px" }
+                }
               >
-                {item.product.attributes.length > 0 &&
-                  item.product.attributes[0].items.map((itm, i) => {
-                    console.log("attrivute", itm);
-                    return (
-                      <div
-                        className={
-                          this.props.mini ? styles.sizeBoxMini : styles.sizeBox
-                        }
-                      >
-                        <span
+                {console.log("sizePerItem", this.state.arraySizePerItem)}
+                <p
+                  className={
+                    this.props.mini
+                      ? styles.horizontalLineMini
+                      : styles.horizontalLine
+                  }
+                />
+                <p
+                  className={
+                    this.props.mini ? styles.title1Mini : styles.title1
+                  }
+                >
+                  {item.product.name}
+                </p>
+                <p
+                  className={
+                    this.props.mini ? styles.title2Mini : styles.title2
+                  }
+                >
+                  {item.product.name}
+                </p>
+                <p
+                  className={this.props.mini ? styles.priceMini : styles.price}
+                >
+                  {getCurrencySymbol(this.props.selectedCurrency)}{" "}
+                  {
+                    item.product.prices[
+                      handleCurrencyIndex(this.props.selectedCurrency)
+                    ].amount
+                  }
+                </p>
+                <div
+                  className={this.props.mini ? styles.boxesMini : styles.boxes}
+                >
+                  {item.product.attributes.length > 0 &&
+                    item.product.attributes[0].items.map((itm, i) => {
+                      console.log("attrivute", itm);
+                      return (
+                        <div
                           className={
                             this.props.mini
-                              ? styles.sizeBoxTextMini
-                              : styles.sizeBoxText
+                              ? styles.sizeBoxMini
+                              : styles.sizeBox
                           }
                         >
-                          {itm.displayValue}
-                        </span>
-                      </div>
-                    );
-                  })}
-              </div>
-              <div
-                className={
-                  this.props.mini ? styles.rightDivMini : styles.rightDiv
-                }
-              >
-                <div style={{ display: "inline-block", marginTop: "10px" }}>
-                  <div
-                    className={
-                      this.props.mini ? styles.plusBoxMini : styles.plusBox
-                    }
-                    onClick={() => {
-                      this.props.addToCart({
-                        product: item.product,
-                        amount: 1,
-                      });
-                    }}
-                  >
-                    +
-                  </div>
-                  <div
-                    className={
-                      this.props.mini ? styles.amountBoxMini : styles.amountBox
-                    }
-                  >
-                    {item.amount}
-                    {console.log("amount", item.amount)}
-                  </div>
-                  <div
-                    className={
-                      this.props.mini ? styles.minusBoxMini : styles.minusBox
-                    }
-                    onClick={() => {
-                      this.props.removeFromCart({
-                        product: item.product,
-                        amount: item.amount,
-                      });
-                    }}
-                  >
-                    -
-                  </div>
+                          <span
+                            className={
+                              this.props.mini
+                                ? styles.sizeBoxTextMini
+                                : styles.sizeBoxText
+                            }
+                          >
+                            {itm.displayValue}
+                          </span>
+                        </div>
+                      );
+                    })}
                 </div>
                 <div
                   className={
-                    this.props.mini ? styles.smallImgMini : styles.smallImg
+                    this.props.mini ? styles.rightDivMini : styles.rightDiv
                   }
                 >
-                  <img src={item.product.gallery[0]} />
+                  <div style={{ display: "inline-block", marginTop: "10px" }}>
+                    <div
+                      className={
+                        this.props.mini ? styles.plusBoxMini : styles.plusBox
+                      }
+                      onClick={() => {
+                        this.props.addToCart({
+                          product: item.product,
+                          amount: 1,
+                        });
+                      }}
+                    >
+                      +
+                    </div>
+                    <div
+                      className={
+                        this.props.mini
+                          ? styles.amountBoxMini
+                          : styles.amountBox
+                      }
+                    >
+                      {item.amount}
+                      {console.log("amount", item.amount)}
+                    </div>
+                    <div
+                      className={
+                        this.props.mini ? styles.minusBoxMini : styles.minusBox
+                      }
+                      onClick={() => {
+                        this.props.removeFromCart({
+                          product: item.product,
+                          amount: item.amount,
+                        });
+                      }}
+                    >
+                      -
+                    </div>
+                  </div>
+                  <div
+                    className={
+                      this.props.mini ? styles.smallImgMini : styles.smallImg
+                    }
+                  >
+                    <Carousel images={item.product.gallery} />
+                  </div>
+                  {console.log(this.props.cart, "cart")}
                 </div>
-                {console.log(this.props.cart, "cart")}
               </div>
-             
-            </div>
-          );
-        })}
+            );
+          })}
         {console.log("total", this.props.total)}
-         <p className={this.props.mini ? styles.totalMini : styles.total}>Total <span style={{float:"right"}}>
-           {this.props.total[handleCurrencyIndex(this.props.selectedCurrency)].toFixed(2)} {getCurrencySymbol(this.props.selectedCurrency)}</span></p>
-         <button 
-                    onClick={()=>{
-                    }}className={this.props.mini ? styles.buttonMini : styles.button}>
-                    <span className={styles.buttonText}>View Bag</span>
-                  </button>
-                  <button 
-                    onClick={()=>{
-                    }}className={this.props.mini ? styles.buttonMini1 : styles.button1}>
-                    <span className={styles.buttonText}>Check out</span>
-                  </button>
+        {this.props.cartSize > 0 && (
+          <>
+            <p className={this.props.mini ? styles.totalMini : styles.total}>
+              Total:
+              <span style={this.props.mini? { marginLeft: "200px" }: {marginLeft: "20px"}}>
+                {this.props.total[
+                  handleCurrencyIndex(this.props.selectedCurrency)
+                ].toFixed(2)}
+                {getCurrencySymbol(this.props.selectedCurrency)}
+              </span>
+            </p>
+            {this.props.mini && (
+              <button
+                onClick={() => {
+                  this.props.toggleModal(false);
+                  this.props.history.push("/cart");
+                }}
+                className={this.props.mini ? styles.buttonMini : styles.button}
+              >
+                <span className={styles.buttonText}>View Bag</span>
+              </button>
+            )}
+            <button onClick={() => {}} className={styles.buttonMini1}>
+              <span className={styles.buttonText}>Check out</span>
+            </button>
+          </>
+        )}
+        {console.log("cartsize", this.props.cartSize)}
       </>
     );
     return this.props.mini ? returningValue : <Layout>{returningValue}</Layout>;
@@ -200,13 +228,14 @@ const mapStateToProps = (state) => ({
   cart: state.general.cart,
   selectedCurrency: state.general.selectedCurrency,
   cartSize: state.general.cartSize,
-  total: state.general.total
+  total: state.general.total,
 });
 const mapDispatchToProps = (dispatch) => {
   return {
     setSelectedProduct: (item) => dispatch(actions.setSelectedProduct(item)),
     addToCart: (item) => dispatch(actions.addToCart(item)),
     removeFromCart: (item) => dispatch(actions.removeFromCart(item)),
+    toggleModal: (item) => dispatch(actions.toggleModal(item)),
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart));

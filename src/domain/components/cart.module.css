@@ -42,7 +42,7 @@
 .title2 {
   width: 292px;
   height: 27px;
-
+  margin-top: -20px;
   font-family: Raleway;
   font-style: normal;
   font-weight: normal;
@@ -61,7 +61,7 @@
   margin-right: 10px;
 }
 .price {
-  width: 86px;
+  width: 250px;
   height: 46px;
   margin-top: -20px;
   margin-bottom: 5px;
@@ -90,6 +90,10 @@
   margin-right: 20px;
   border: 1px solid #1d1f22;
   box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 10px;
 }
 .plusBox {
   width: 45px;
@@ -129,7 +133,6 @@
 .smallImg {
   width: 141px;
   height: 185px;
-  background-color: maroon;
   display: block;
   margin-left: 10px;
   margin-top: 10px;
@@ -139,6 +142,8 @@
     width: 141px;
     height: 185px;
     object-fit: contain;
+    position: sticky;
+    z-index: -1;
 }
 /* ----------Mini-----------*/
 .mainTitleMini {
@@ -296,7 +301,19 @@ margin-right: 10px;
 
 color: #1D1F22;
 }
-.total{}
+.total{
+  width: 1097px;
+  font-family: Roboto;
+font-style: normal;
+font-weight: 600;
+font-size: 22px;
+line-height: 18px;
+/* or 112% */
+margin-right: 10px;
+
+
+color: #1D1F22;
+}
 
 .buttonMini, .buttonMini1 {
     display: inline-flex;
@@ -357,3 +374,22 @@ color: #1D1F22;
   .buttonMini span  {
       color: black;
   }
+  
+.leftArrow {
+  display: inline-flex;
+  position: absolute;
+  margin-top: 60px;
+  margin-left: 0px;
+  font-size: 22px;
+  cursor: pointer;
+}
+.rightArrow {
+  display: inline-flex;
+  position: absolute;
+  float: right;
+  margin-top: 60px;
+  margin-left: -12px;
+  font-size: 22px;
+  cursor: pointer;
+
+}
