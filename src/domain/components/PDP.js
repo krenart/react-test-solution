@@ -63,13 +63,11 @@ class PDP extends Component {
                                 }
                                 className={
                                   item.type === "swatch" &&
-                                  this.state.selectedAttribute[
-                                    `${index}${i}`
-                                  ] 
+                                  this.state.selectedAttribute[`${index}${i}`]
                                     ? styles.sizeBoxActiveSwatch
                                     : this.state.selectedAttribute[
                                         `${index}${i}`
-                                      ] 
+                                      ]
                                     ? styles.sizeBoxActive
                                     : styles.sizeBox
                                 }
@@ -79,10 +77,13 @@ class PDP extends Component {
                                   let arr = this.state.selectedAttribute;
                                   Object.keys(arr).map((item) => {
                                     if (item.charAt(0) == index)
-                                      arr[item] = false;
+                                      delete arr[item];
                                   });
 
-                                  arr[`${index}${i}`] = itm;
+                                  arr[`${index}${i}`] = {
+                                    name: item.name,
+                                    item: itm.value,
+                                  };
                                   console.log("after filter", arr);
                                   this.setState({ selectedAttribute: arr });
                                 }}
@@ -92,7 +93,7 @@ class PDP extends Component {
                                     className={
                                       this.state.selectedAttribute[
                                         `${index}${i}`
-                                      ] 
+                                      ]
                                         ? styles.sizeBoxTextActive
                                         : styles.sizeBoxText
                                     }
@@ -119,14 +120,17 @@ class PDP extends Component {
                   <button
                     onClick={() => {
                       if (
-                        Object.keys(this.state.selectedAttribute).length === 0
-                      )
-                        alert("you should select at leas one attribute");
-                      else
+                        Object.keys(this.state.selectedAttribute).length > 0 ||
+                        this.props.product.attributes.length === 0
+                      ) {
                         this.props.addToCart({
                           product: this.props.product,
                           amount: 1,
+                          attributes: Object.values(
+                            this.state.selectedAttribute
+                          ),
                         });
+                      } else alert("you should select at least one attribute");
                     }}
                     className={styles.button}
                   >

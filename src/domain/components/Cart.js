@@ -111,11 +111,29 @@ class Cart extends Component {
                 <div
                   className={this.props.mini ? styles.boxesMini : styles.boxes}
                 >
-                  {item.product.attributes.length > 0 &&
-                    item.product.attributes[0].items.map((itm, i) => {
-                      console.log("attrivute", itm);
-                      return (
+                  {/* {item.product.attributes.length > 0 && */}
+                  {item.attributes.map((atr, idx) => {
+                    return (
+                      <>
+                        <span
+                          style={
+                            this.props.mini
+                              ? {
+                                  marginBottom: "0px",
+                                  fontSize: "13px",
+                                }
+                              : { fontSize: "22px", marginRight: "5px" }
+                          }
+                        >
+                          {`${atr.name}:  `}
+                        </span>
+
                         <div
+                          style={
+                            atr.name === "Color"
+                              ? { backgroundColor: `${atr.item}` }
+                              : null
+                          }
                           className={
                             this.props.mini
                               ? styles.sizeBoxMini
@@ -129,11 +147,12 @@ class Cart extends Component {
                                 : styles.sizeBoxText
                             }
                           >
-                            {itm.displayValue}
+                            {atr.name === "Color" ? "" : atr.item}
                           </span>
                         </div>
-                      );
-                    })}
+                      </>
+                    );
+                  })}
                 </div>
                 <div
                   className={
@@ -149,6 +168,7 @@ class Cart extends Component {
                         this.props.addToCart({
                           product: item.product,
                           amount: 1,
+                          attributes: item.attributes,
                         });
                       }}
                     >
@@ -172,6 +192,7 @@ class Cart extends Component {
                         this.props.removeFromCart({
                           product: item.product,
                           amount: item.amount,
+                          attributes: item.attributes,
                         });
                       }}
                     >
@@ -195,7 +216,13 @@ class Cart extends Component {
           <>
             <p className={this.props.mini ? styles.totalMini : styles.total}>
               Total:
-              <span style={this.props.mini? { marginLeft: "200px" }: {marginLeft: "20px"}}>
+              <span
+                style={
+                  this.props.mini
+                    ? { marginLeft: "200px" }
+                    : { marginLeft: "20px" }
+                }
+              >
                 {this.props.total[
                   handleCurrencyIndex(this.props.selectedCurrency)
                 ].toFixed(2)}

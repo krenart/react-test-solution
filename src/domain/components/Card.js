@@ -26,7 +26,15 @@ class Card extends Component {
     super(props);
     this.state = {
       openPDP: false,
+      selectedAttribute: [],
+      openAttributes: false,
     };
+
+    this.handleToggleAttributes = this.handleToggleAttributes.bind(this);
+  }
+  handleToggleAttributes() {
+    this.setState({ openAttributes: !this.state.openAttributes });
+    this.setState({ selectedAttribute: [] });
   }
 
   render() {
@@ -73,17 +81,118 @@ class Card extends Component {
           )}
           <div
             onClick={() => {
-              let tempObject = {
-                product: this.props.item,
-                amount: 1,
-              };
-              this.props.addToCart(tempObject);
+              if (this.props.item.attributes.length === 0) {
+                this.props.addToCart({
+                  product: this.props.item,
+                  amount: 1,
+                  attributes: [],
+                });
+              } else this.handleToggleAttributes();
             }}
             className={
               this.props.item.inStock ? styles.icon : styles.iconHidden
             }
           >
             <FiShoppingCart style={{ marginTop: "13px", marginLeft: "-3px" }} />
+          </div>
+          <div>
+            {this.state.openAttributes &&
+              this.props.item.attributes.length !== 0 && (
+                <div className={styles.attributesDialog}>
+                  <p>Select attributes:</p>
+                  {this.props.item.attributes.map((item, index) => {
+                    return (
+                      <>
+                        <p className={styles.sizeText}>{item.name}</p>
+                        <div style={{ display: "flex", marginTop: "-10px" }}>
+                          {item.items.map((itm, i) => {
+                            return (
+                              <div
+                                style={
+                                  item.type === "swatch"
+                                    ? { backgroundColor: `${itm.value}` }
+                                    : null
+                                }
+                                className={
+                                  item.type === "swatch" &&
+                                  this.state.selectedAttribute[`${index}${i}`]
+                                    ? styles.sizeBoxActiveSwatch
+                                    : this.state.selectedAttribute[
+                                        `${index}${i}`
+                                      ]
+                                    ? styles.sizeBoxActive
+                                    : styles.sizeBox
+                                }
+                                onClick={() => {
+                                  debugger;
+                                  console.log("type", item.type);
+                                  console.log("value", itm.value);
+                                  let arr = this.state.selectedAttribute;
+                                  Object.keys(arr).map((item) => {
+                                    if (item.charAt(0) == index)
+                                      delete arr[item];
+                                  });
+
+                                  arr[`${index}${i}`] = {
+                                    name: item.name,
+                                    item: itm.value,
+                                  };
+                                  console.log("after filter", arr);
+                                  this.setState({ selectedAttribute: arr });
+                                }}
+                              >
+                                {item.type !== "swatch" && (
+                                  <span
+                                    className={
+                                      this.state.selectedAttribute[
+                                        `${index}${i}`
+                                      ]
+                                        ? styles.sizeBoxTextActive
+                                        : styles.sizeBoxText
+                                    }
+                                  >
+                                    {itm.displayValue}
+                                  </span>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </>
+                    );
+                  })}
+                  <p>
+                    <button
+                      className={styles.button}
+                      onClick={() => {
+                        if (
+                          Object.keys(this.state.selectedAttribute).length === 0
+                        )
+                          alert("Select at least one attribute");
+                        else {
+                          let tempObject = {
+                            product: this.props.item,
+                            amount: 1,
+                            attributes: Object.values(
+                              this.state.selectedAttribute
+                            ),
+                          };
+                          this.props.addToCart(tempObject);
+                          this.handleToggleAttributes();
+                        }
+                      }}
+                    >
+                      <span>Add to cart</span>
+                    </button>
+                    <button
+                      className={styles.buttonClose}
+                      onClick={this.handleToggleAttributes}
+                    >
+                      <span>Close</span>
+                    </button>
+                  </p>
+                </div>
+              )}
           </div>
           <div className={styles.title}>{this.props.item.name}</div>
           <div className={styles.price}>

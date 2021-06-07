@@ -32,25 +32,27 @@ class NavBar extends Component {
     super(props);
     this.state = {
       openDropdown: false,
-      dropdownValue: this.props.currency? getCurrencySymbol(this.props.currency): "$",
+      dropdownValue: this.props.currency
+        ? getCurrencySymbol(this.props.currency)
+        : "$",
       openMiniCart: false,
       activeMenuItem: "all",
     };
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.handleDropdownValue = this.handleDropdownValue.bind(this);
-    this.toggleMiniCart =this.toggleMiniCart.bind(this);
+    this.toggleMiniCart = this.toggleMiniCart.bind(this);
   }
-  handleActiveMenuItem (item) {
-    this.setState({activeMenuItem: item});
+  handleActiveMenuItem(item) {
+    this.setState({ activeMenuItem: item });
     this.props.setCategoryFilter(item);
-    
+
     this.props.history.push(`/plp/${item}`);
   }
   toggleDropdown() {
     this.setState({ openDropdown: !this.state.openDropdown });
   }
   handleDropdownValue(value) {
-    let symbol = getCurrencySymbol(value)
+    let symbol = getCurrencySymbol(value);
     this.setState({ dropdownValue: symbol });
     this.setState({ openDropdown: false });
     this.props.setCurrency(value);
@@ -66,29 +68,45 @@ class NavBar extends Component {
     return (
       <Container>
         <div className={styles.navBar}>
-          <span 
-            onClick={()=>this.handleActiveMenuItem("all")}
-            className={this.state.activeMenuItem==="all"? styles.menuItemActive: styles.menuItem}
+          <span
+            onClick={() => this.handleActiveMenuItem("all")}
+            className={
+              this.state.activeMenuItem === "all"
+                ? styles.menuItemActive
+                : styles.menuItem
+            }
           >
             ALL
           </span>
-          <span onClick={()=>this.handleActiveMenuItem("clothes")} 
-          className={this.state.activeMenuItem==="clothes"? styles.menuItemActive: styles.menuItem}>
+          <span
+            onClick={() => this.handleActiveMenuItem("clothes")}
+            className={
+              this.state.activeMenuItem === "clothes"
+                ? styles.menuItemActive
+                : styles.menuItem
+            }
+          >
             CLOTHES
           </span>
-          <span onClick={()=>this.handleActiveMenuItem("tech")} 
-          className={this.state.activeMenuItem==="tech"? styles.menuItemActive: styles.menuItem}>
+          <span
+            onClick={() => this.handleActiveMenuItem("tech")}
+            className={
+              this.state.activeMenuItem === "tech"
+                ? styles.menuItemActive
+                : styles.menuItem
+            }
+          >
             TECH
           </span>
 
-          <span style={{ float: "right" , marginRight:"217px"}}>
+          <span style={{ float: "right", marginRight: "217px" }}>
             <span
               className={styles.dropdownValue}
               onClick={this.toggleDropdown}
             >
               {this.state.dropdownValue}
               <span className={styles.dropdownValueIcon}>
-                {this.state.openDropdown?<AiOutlineUp/> :<AiOutlineDown  />}
+                {this.state.openDropdown ? <AiOutlineUp /> : <AiOutlineDown />}
               </span>
             </span>
             {this.state.openDropdown && (
@@ -107,19 +125,20 @@ class NavBar extends Component {
                 })}
               </div>
             )}
-            <span onClick={this.toggleMiniCart} >
-              <span >
-                <FiShoppingCart style={{marginTop:"12px", fontSize: "18px"}}/>
+            <span onClick={this.toggleMiniCart}>
+              <span>
+                <FiShoppingCart
+                  style={{ marginTop: "12px", fontSize: "18px" }}
+                />
               </span>
-             {this.props.size>0 && <span className={styles.cartSize} >
-                {this.props.size}
-              </span>}
+              {this.props.size > 0 && (
+                <span className={styles.cartSize}>{this.props.size}</span>
+              )}
             </span>
             {this.state.openMiniCart && (
-              <div className={styles.miniCart} >
+              <div className={styles.miniCart}>
                 <Cart mini={true} />
               </div>
-              
             )}
           </span>
         </div>

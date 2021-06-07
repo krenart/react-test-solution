@@ -1,19 +1,17 @@
 .leftArrow {
-    display: inline-flex;
-    position: absolute;
-    margin-top: 60px;
-    margin-left: 0px;
-    font-size: 22px;
-    cursor: pointer;
-  }
-  .rightArrow {
-    display: inline-flex;
-    position: absolute;
-    float: right;
-    margin-top: 60px;
-    margin-left: -12px;
-    font-size: 22px;
-    cursor: pointer;
-  
-  }
-  
+  display: inline-flex;
+  position: absolute;
+  margin-top: 60px;
+  margin-left: 0px;
+  font-size: 22px;
+  cursor: pointer;
+}
+.rightArrow {
+  display: inline-flex;
+  position: absolute;
+  float: right;
+  margin-top: 60px;
+  margin-left: -12px;
+  font-size: 22px;
+  cursor: pointer;
+}

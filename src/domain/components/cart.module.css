@@ -9,7 +9,6 @@
   font-weight: bold;
   font-size: 32px;
   line-height: 40px;
-  /* identical to box height, or 125% */
 
   text-transform: uppercase;
   color: #1d1f22;
@@ -79,9 +78,9 @@
 }
 
 .boxes {
-  display: inline-block;
+  display: inline-flex;
 
-  margin-top: -550px;
+  margin-top: -1650px;
 }
 .sizeBox {
   display: inline-block;
@@ -94,6 +93,9 @@
   justify-content: center;
   text-align: center;
   padding-top: 10px;
+  background-color: black;
+  color: white;
+  overflow: hidden;
 }
 .plusBox {
   width: 45px;
@@ -139,11 +141,11 @@
   float: right;
 }
 .smallImg img {
-    width: 141px;
-    height: 185px;
-    object-fit: contain;
-    position: sticky;
-    z-index: -1;
+  width: 141px;
+  height: 185px;
+  object-fit: contain;
+  position: sticky;
+  z-index: -1;
 }
 /* ----------Mini-----------*/
 .mainTitleMini {
@@ -151,7 +153,7 @@
   height: 40px;
   left: 100px;
   top: 160px;
-    margin-bottom: 30px;
+  margin-bottom: 30px;
   font-family: Raleway;
   font-style: normal;
   font-weight: bold;
@@ -213,26 +215,30 @@
   color: #1d1f22;
 }
 .rightDivMini {
-    float: right;
-    margin-top: -100px;
-    margin-right: 10px;
-  }
+  float: right;
+  margin-top: -100px;
+  margin-right: 10px;
+}
 .boxesMini {
   display: inline-block;
-
+  width: 165px;
   margin-top: 0px;
+  margin-bottom: 20px;
 }
 .sizeBoxMini {
   display: inline-block;
-  width: 24px;
-  height: 24px;
+  width: 23px;
+  height: 20px;
   margin-right: 10px;
-  margin-top: 20px;
+  margin-top: 2px;
   border: 1px solid #1d1f22;
   box-sizing: border-box;
   font-size: 12px;
   text-align: center;
   justify-content: center;
+  background-color: black;
+  color: white;
+  overflow: hidden;
 }
 .sizeBoxTextMini {
   font-size: 12px;
@@ -283,98 +289,96 @@
   object-fit: contain;
 }
 
-
 .smallImgMini img {
-    object-fit: contain;
-    width: 105px;
-    height: 137px;
+  object-fit: contain;
+  width: 105px;
+  height: 137px;
 }
 .totalMini {
-    font-family: Roboto;
-font-style: normal;
-font-weight: 600;
-font-size: 16px;
-line-height: 18px;
-/* or 112% */
-margin-right: 10px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 18px;
+  /* or 112% */
+  margin-right: 10px;
 
-
-color: #1D1F22;
+  color: #1d1f22;
 }
-.total{
+.total {
   width: 1097px;
   font-family: Roboto;
-font-style: normal;
-font-weight: 600;
-font-size: 22px;
-line-height: 18px;
-/* or 112% */
-margin-right: 10px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 18px;
+  /* or 112% */
+  margin-right: 10px;
 
-
-color: #1D1F22;
+  color: #1d1f22;
 }
 
-.buttonMini, .buttonMini1 {
-    display: inline-flex;
+.buttonMini,
+.buttonMini1 {
+  display: inline-flex;
 
-    align-items: center;
-    padding: 16px 32px;
-    width: 150px;
-    height: 52px;
-    margin-right: 10px;
-  
-    background: #5ece7b;
-    border: 0px;
-    cursor: pointer;
-  }
-  .buttonMini {
-      background-color: white;
-      border: 1px solid black
-      
-  }
-  .buttonMini1:active {
-    background-color: #36b056;
-  }
-  .buttonMini:active {
-      background-color: lightgrey;
-  }
-  
-  .buttonMini span, .buttonMini1 span {
-    position: static;
-    /* width: 105px; */
-    height: 20px;
-  
-    /* --buttonMini-font */
-  
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 120%;
-    /* identical to box height, or 19px */
-  
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-self: center;
-    text-transform: uppercase;
-  
-    /* --c-white */
-  
-    color: #ffffff;
-  
-    /* Inside Auto Layout */
-  
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    margin: 0px 0px;
-  }
-  .buttonMini span  {
-      color: black;
-  }
-  
+  align-items: center;
+  padding: 16px 32px;
+  width: 150px;
+  height: 52px;
+  margin-right: 10px;
+
+  background: #5ece7b;
+  border: 0px;
+  cursor: pointer;
+}
+.buttonMini {
+  background-color: white;
+  border: 1px solid black;
+}
+.buttonMini1:active {
+  background-color: #36b056;
+}
+.buttonMini:active {
+  background-color: lightgrey;
+}
+
+.buttonMini span,
+.buttonMini1 span {
+  position: static;
+  /* width: 105px; */
+  height: 20px;
+
+  /* --buttonMini-font */
+
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  /* identical to box height, or 19px */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-self: center;
+  text-transform: uppercase;
+
+  /* --c-white */
+
+  color: #ffffff;
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 0px;
+}
+.buttonMini span {
+  color: black;
+}
+
 .leftArrow {
   display: inline-flex;
   position: absolute;
@@ -391,5 +395,4 @@ color: #1D1F22;
   margin-left: -12px;
   font-size: 22px;
   cursor: pointer;
-
 }

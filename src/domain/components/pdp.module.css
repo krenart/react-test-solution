@@ -61,8 +61,8 @@
 
   display: flex;
   align-items: center;
-white-space: nowrap;
-overflow: hidden;
+  white-space: nowrap;
+  overflow: hidden;
   color: #1d1f22;
 }
 .sizeText {
@@ -98,41 +98,41 @@ overflow: hidden;
   cursor: pointer;
 }
 .sizeBoxActive {
-    position: static;
-    display: inline;
-    width: 63px;
-    height: 45px;
-    margin-right: 20px;
-    margin-bottom: 10px;
-    white-space: nowrap;
-  
-    border: 1px solid #a6a6a6;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    /* text-align: center; */
-    justify-content: center;
-    background-color: black;
-    color: white;
+  position: static;
+  display: inline;
+  width: 63px;
+  height: 45px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+
+  border: 1px solid #a6a6a6;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  /* text-align: center; */
+  justify-content: center;
+  background-color: black;
+  color: white;
 }
 .sizeBoxActiveSwatch {
-    position: static;
-    display: inline;
-    width: 63px;
-    height: 45px;
-    margin-right: 20px;
-    margin-bottom: 10px;
-    white-space: nowrap;
-  
-    border: 1px solid #a6a6a6;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    /* text-align: center; */
-    justify-content: center;
-    background-color: black;
-    color: white;
-    border: 2px solid red;
+  position: static;
+  display: inline;
+  width: 63px;
+  height: 45px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+
+  border: 1px solid #a6a6a6;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  /* text-align: center; */
+  justify-content: center;
+  background-color: black;
+  color: white;
+  border: 2px solid red;
 }
 .sizeBoxText {
   width: 8px;
@@ -154,24 +154,24 @@ overflow: hidden;
   color: #292929;
 }
 .sizeBoxTextActive {
-    width: 8px;
-    height: 18px;
-    margin-left: -5px;
-  
-    font-family: Source Sans Pro;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 18px;
-    /* identical to box height, or 112% */
-  
-    display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: 0.05em;
-  
-    color: white;
-    background-color: black;
+  width: 8px;
+  height: 18px;
+  margin-left: -5px;
+
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
+  /* identical to box height, or 112% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.05em;
+
+  color: white;
+  background-color: black;
 }
 .priceText {
   /* position: absolute; */
