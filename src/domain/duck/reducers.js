@@ -1,5 +1,16 @@
+import { act } from "@testing-library/react";
 import constants from "./constants";
 
+function arrayEquals(a, b) {
+  debugger;
+  if (a === b) return true;
+  if (a == null || b == null) return false;
+  if (a.length !== b.length) return false;
+  for (let i = 0; i < a.length; ++i) {
+    if (a[i].name !== b[i].name || a[i].item !== b[i].item) return false;
+  }
+  return true;
+}
 const defaultState = {
   selectedProduct: undefined,
   selectedCurrency: "USD",
@@ -30,8 +41,12 @@ export default function reducer(currentState = defaultState, action) {
       currentState.cart.map((item, index) => {
         debugger;
         if (item.product.name === action.payload.product.name) {
-          tempArr[index].amount++;
-          isNew = false;
+          debugger;
+          if (arrayEquals(item.attributes, action.payload.attributes)) {
+            debugger;
+            tempArr[index].amount++;
+            isNew = false;
+          }
         }
       });
       let tempTotal = currentState.total;
@@ -61,21 +76,29 @@ export default function reducer(currentState = defaultState, action) {
         ? {
             ...currentState,
             cart: currentState.cart.map((item, index) => {
-              if (item.product.name === action.payload.product.name)
-                return {
-                  product: item.product,
-                  amount: item.amount - 1,
-                };
-              else return item;
+              if (item.product.name === action.payload.product.name) {
+                if (arrayEquals(item.attributes, action.payload.attributes)) {
+                  return {
+                    product: item.product,
+                    amount: item.amount - 1,
+                    attributes: action.payload.attributes,
+                  };
+                }
+              } else return item;
             }),
             cartSize: currentState.cartSize - 1,
             total: tmpTotal,
           }
         : {
             ...currentState,
-            cart: currentState.cart.filter(
-              (item) => item.product.name !== action.payload.product.name
-            ),
+            cart: currentState.cart.filter((item) => {
+              if (
+                item.product.name == action.payload.product.name &&
+                arrayEquals(item.attributes, action.payload.attributes)
+              )
+                return false;
+              else return true;
+            }),
             cartSize: currentState.cartSize - 1,
             total: tmpTotal,
           };
