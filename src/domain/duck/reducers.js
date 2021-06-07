@@ -2,7 +2,6 @@ import { act } from "@testing-library/react";
 import constants from "./constants";
 
 function arrayEquals(a, b) {
-  debugger;
   if (a === b) return true;
   if (a == null || b == null) return false;
   if (a.length !== b.length) return false;
@@ -39,11 +38,8 @@ export default function reducer(currentState = defaultState, action) {
       let tempArr = currentState.cart;
       let isNew = true;
       currentState.cart.map((item, index) => {
-        debugger;
         if (item.product.name === action.payload.product.name) {
-          debugger;
           if (arrayEquals(item.attributes, action.payload.attributes)) {
-            debugger;
             tempArr[index].amount++;
             isNew = false;
           }

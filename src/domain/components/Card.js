@@ -38,7 +38,6 @@ class Card extends Component {
   }
 
   render() {
-    console.log("item of products", this.props.item);
 
     return (
       <>
@@ -124,9 +123,6 @@ class Card extends Component {
                                     : styles.sizeBox
                                 }
                                 onClick={() => {
-                                  debugger;
-                                  console.log("type", item.type);
-                                  console.log("value", itm.value);
                                   let arr = this.state.selectedAttribute;
                                   Object.keys(arr).map((item) => {
                                     if (item.charAt(0) == index)
@@ -137,7 +133,6 @@ class Card extends Component {
                                     name: item.name,
                                     item: itm.value,
                                   };
-                                  console.log("after filter", arr);
                                   this.setState({ selectedAttribute: arr });
                                 }}
                               >

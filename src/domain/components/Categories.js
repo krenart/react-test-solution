@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import Container from "./Container";
-import NavBar from "./NavBar";
 import Card from "./Card";
-import PDP from "./PDP";
 import { GET_CATEGORIES } from "../GraphQL/Queries";
 import { graphql } from "@apollo/client/react/hoc";
 import Layout from "./Layout";
@@ -16,8 +13,6 @@ class Categories extends Component {
     };
   }
   render() {
-    console.log("props", this.props);
-    let items = [1, 2, 3, 4, 5];
     let products =
       this.props.data &&
       this.props.data.category &&

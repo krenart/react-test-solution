@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { getCurrencySymbol } from "./NavBar";
 import Layout from "./Layout";
 import styles from "./pdp.module.css";
-import Container from "./Container";
 import { connect } from "react-redux";
 import { handleCurrencyIndex } from "./Card";
 import actions from "../duck/actions";
@@ -19,8 +18,6 @@ class PDP extends Component {
     this.setState({ imgIndex: index });
   }
   render() {
-    console.log("pdp props", this.props);
-    console.log("pdp state", this.state);
     return (
       <>
         <Layout>
@@ -72,8 +69,6 @@ class PDP extends Component {
                                     : styles.sizeBox
                                 }
                                 onClick={() => {
-                                  console.log("type", item.type);
-                                  console.log("value", itm.value);
                                   let arr = this.state.selectedAttribute;
                                   Object.keys(arr).map((item) => {
                                     if (item.charAt(0) == index)
@@ -84,7 +79,6 @@ class PDP extends Component {
                                     name: item.name,
                                     item: itm.value,
                                   };
-                                  console.log("after filter", arr);
                                   this.setState({ selectedAttribute: arr });
                                 }}
                               >

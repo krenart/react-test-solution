@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Card from "./Card";
-import PDP from "./PDP";
 import styles from "./cart.module.css";
 import { connect } from "react-redux";
 import actions from "../duck/actions";
@@ -19,7 +17,6 @@ class Cart extends Component {
     };
   }
   handleAdd(index) {
-    debugger;
     let arr = this.state.arraySizePerItem;
     if (this.state.arraySizePerItem[index] == undefined)
       this.setState({
@@ -76,7 +73,6 @@ class Cart extends Component {
                     : { width: "1097px", marginBottom: "30px" }
                 }
               >
-                {console.log("sizePerItem", this.state.arraySizePerItem)}
                 <p
                   className={
                     this.props.mini
@@ -182,7 +178,6 @@ class Cart extends Component {
                       }
                     >
                       {item.amount}
-                      {console.log("amount", item.amount)}
                     </div>
                     <div
                       className={
@@ -206,12 +201,10 @@ class Cart extends Component {
                   >
                     <Carousel images={item.product.gallery} />
                   </div>
-                  {console.log(this.props.cart, "cart")}
                 </div>
               </div>
             );
           })}
-        {console.log("total", this.props.total)}
         {this.props.cartSize > 0 && (
           <>
             <p className={this.props.mini ? styles.totalMini : styles.total}>
@@ -245,7 +238,6 @@ class Cart extends Component {
             </button>
           </>
         )}
-        {console.log("cartsize", this.props.cartSize)}
       </>
     );
     return this.props.mini ? returningValue : <Layout>{returningValue}</Layout>;

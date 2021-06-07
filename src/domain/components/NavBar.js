@@ -3,7 +3,6 @@ import Container from "./Container";
 import { FiShoppingCart } from "react-icons/fi";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import styles from "./navBar.module.css";
-import { gql } from "@apollo/client";
 import { GET_CURRENCIES } from "../GraphQL/Queries";
 import { graphql } from "@apollo/client/react/hoc";
 import actions from "../duck/actions";
@@ -63,8 +62,6 @@ class NavBar extends Component {
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.state.openMiniCart);
     return (
       <Container>
         <div className={styles.navBar}>
